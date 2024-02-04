@@ -1,0 +1,78 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "7Timer Weather Forecast API",
+    "description": "API for accessing weather forecasts from 7Timer.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://www.7timer.info",
+      "description": "Main API Server"
+    }
+  ],
+  "paths": {
+    "/bin/api.pl": {
+      "get": {
+        "operationId": "getWeatherForecast",
+        "summary": "Get Weather Forecast",
+        "description": "Retrieves weather forecast data based on geographic coordinates, product type, and output format.",
+        "parameters": [
+          {
+            "name": "lon",
+            "in": "query",
+            "required": true,
+            "description": "Longitude of the location. Geographic coordinates of the specified site, must be given as pure float numbers, such as +23.090 or -23.090. At this stage, the precision of any incoming coordinate float number is expected to be 0.001. Incoming float with higher precision will be rounded.",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "lat",
+            "in": "query",
+            "required": true,
+            "description": "Latitude of the location. Geographic coordinates of the specified site, must be given as pure float numbers, such as +23.090 or -23.090. At this stage, the precision of any incoming coordinate float number is expected to be 0.001. Incoming float with higher precision will be rounded.",
+            "schema": {
+              "type": "number",
+              "format": "float"
+            }
+          },
+          {
+            "name": "product",
+            "in": "query",
+            "required": true,
+            "description": "Type of the forecast product use civillight only.",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "civillight"
+              ]
+            }
+          },
+          {
+            "name": "output",
+            "in": "query",
+            "required": true,
+            "description": "Output format (xml or json)",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with weather data"
+          },
+          "default": {
+            "description": "Unexpected error"
+          }
+        }
+      }
+    }
+  }
+}
